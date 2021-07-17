@@ -1,0 +1,110 @@
+from tkinter import *
+from tkinter import ttk
+import webbrowser
+window = Tk()
+window.geometry("500x400")
+window.title("DATA STRUCTRE  by: mohammad ammar")
+window.resizable(0,0)
+
+wrapper1 = LabelFrame(window)
+
+my_canvas = Canvas(wrapper1)
+my_canvas.pack(side=LEFT,fill="both")
+
+my_Scrollbar = ttk.Scrollbar(wrapper1,orient="vertical",command=my_canvas.yview )
+my_Scrollbar.pack(side=RIGHT,fill="y")
+
+
+my_canvas.configure(yscrollcommand=my_Scrollbar.set)
+my_canvas.bind('<Configure>',lambda e:my_canvas.configure(scrollregion=my_canvas.bbox('all'))) #scrollregion active
+
+my_frame=Frame(my_canvas)
+my_canvas.create_window((0,0),window=my_frame,anchor="nw")
+
+
+wrapper1.pack(fill="both",expand="yes",padx=1,pady=1)
+
+
+
+data={ "1.3-Expressions in python         ":"https://www.youtube.com/watch?v=vpQn6D0q_xY&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=8&t=1s"
+      ,"1.4-Control Flow                  ":"https://www.youtube.com/watch?v=Dr6slzP28sI&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=6",
+       "1.5-Functions                     ":"https://www.youtube.com/watch?v=pj9rFCYi_H4&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=5",
+       "1.6- Simple Input Output(I/O)     ":"https://www.youtube.com/watch?v=QUHZ9lm7bKg&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=2",
+       "1.7-Exceptions                    ":"https://www.youtube.com/watch?v=ItTZy1BPvS0&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=1",
+       '1.8-Iterators and Generators      ':'https://www.youtube.com/watch?v=_iu5uPjz3wg&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=4',
+       '1.9-python Convenience            ':'https://www.youtube.com/watch?v=4_Si439xbFA&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=3',
+       '1.10-global and local scope and namespace':'https://www.youtube.com/watch?v=4_Si439xbFA&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=3',
+       '1.11-Modules and Import           ':'https://www.youtube.com/watch?v=OfY49mHIE-g&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=14',
+       '2.1-Goals and Principles of OOP   ':'https://www.youtube.com/watch?v=gSibldVKUqo&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=9',
+       '2.2-Class Definition              ':'https://www.youtube.com/watch?v=0vcbYqUrbF4&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=7',
+       '2.2-Class Definition and Debugger ':'https://www.youtube.com/watch?v=PFSUKJDUN7k&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=13',
+       '2.3-Inheritance                   ':'https://www.youtube.com/watch?v=Nh7H5k_lQpo&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=11',
+       'None-Assignment 1 Discussions     ':'https://www.youtube.com/watch?v=BzFwtfyBOjI&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=10',
+       '3.1- Experimental Studies of Algorithm Running Time':'https://www.youtube.com/watch?v=bbTzSzYOt6I&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=12',
+       '3.2-Functions Used in Algorithm Analysis':'https://www.youtube.com/watch?v=CxjlT9lhKnI&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=15',
+       '3.3.a-Asymptotic Analysis I       ':'https://www.youtube.com/watch?v=q0A7e_ikh3E&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=16',
+       '3.3.c-Asymptotic Analysis III     ':'https://www.youtube.com/watch?v=33ZitK-WlrU&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=17',
+       '3.3.d-Asymptotic Analysis IV'      :'https://www.youtube.com/watch?v=Fg3IqSSGam0&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=18',
+       '3.3.e-Asymptotic Analysis V       ':'https://www.youtube.com/watch?v=aZ6znhEJL1w&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=19',
+       '3.4-Simple Justification Techniques':'https://www.youtube.com/watch?v=0GJpA30oES4&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=20',
+       '4.1-Illustrative Examples          ':'https://www.youtube.com/watch?v=iErUeHGAAw8&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=21',
+       '4.1.b-Illustrative Examples II     ':'https://www.youtube.com/watch?v=3aCiC8rqV0g&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=23',
+       '4.2-Analyzing Recursive Algorithms ':'https://www.youtube.com/watch?v=ZC7pFW6jU0U&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=24',
+       'None-Analyzing Assignment 2 Clarification':'https://www.youtube.com/watch?v=otadAiM3ZB4&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=25',
+       '4.3-Recursion Run Amok             ':'https://www.youtube.com/watch?v=YHlyY6jCjLs&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=26',
+       '4.5- Unti Testing                  ':'https://www.youtube.com/watch?v=FMj7sPyDdbk&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=29',
+       "5.1-Python's Sequence Types"        :'https://www.youtube.com/watch?v=WuMavaCyyZM&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=27',
+       '5.2- Low-Level Arrays'              :'https://www.youtube.com/watch?v=3z1ImQEtCrc&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=28',
+        '5.2.b- Low Level Arrays II        ':'https://www.youtube.com/watch?v=0rR5cKHK2-s&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=30',
+       '5.3.a-Dynamic Arrays and Amortization I': 'https://www.youtube.com/watch?v=f90Uwg5qGwo&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=31',
+       '5.3.b- Algorithms Dynamic Arrays and Amortization II': 'https://www.youtube.com/watch?v=Pi8MeIdd7l0&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=32',
+       "5.4-Efficiency of Python's Sequence Types": 'https://www.youtube.com/watch?v=oqHyrdA5Ons&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=34',
+       '5.5.a-Using Array Based Sequences I': 'https://www.youtube.com/watch?v=YGIQfUBxcvA&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=33',
+       '5.5.b-Using Array Based Sequences Insertion Sort II': 'https://www.youtube.com/watch?v=a1PMkRmAjAo&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=36',
+       'None-Assignment 2 Asymptotic Analysis Discussion': 'https://www.youtube.com/watch?v=K5oBvmsfoCo&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=35',
+       '5.6-Multidimensional Data Sets     ': 'https://www.youtube.com/watch?v=VeTN5xuG4vU&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=37',
+       '6.1.a-Stacks I                     ': 'https://www.youtube.com/watch?v=8x4VCJ6kmTQ&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=38',
+       '6.1.b-Stacks II                    ': 'https://www.youtube.com/watch?v=1cz4tFulW0I&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=39',
+       '6.2.a-Queues I                     ': 'https://www.youtube.com/watch?v=sG6NAwX40js&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=40',
+       '6.2.b-Queues II                    ': 'https://www.youtube.com/watch?v=XAJLQgPpjJQ&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=41',
+       '6.3-Double Ended Queues            ': 'https://www.youtube.com/watch?v=_Qhs4uFOZdk&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=42',
+       '7.1.a-Singly Linked Lists I        ': 'https://www.youtube.com/watch?v=gpdP1uB5qWk&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=43',
+       '7.1.b-Singly Linked Lists II       ': 'https://www.youtube.com/watch?v=TTihPnbBdPI&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=44',
+       '7.2- Circularly Linked Lists       ': 'https://www.youtube.com/watch?v=W25P64yWWjQ&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=45',
+       'None-Assignment 4 Clarification    ': 'https://www.youtube.com/watch?v=ufzuK-RY9yc&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=46',
+       '7.3-Doubly Linked Lists            ': 'https://www.youtube.com/watch?v=KGZWj8OIVCQ&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=47',
+       '7.4-Positional ADT                 ': 'https://www.youtube.com/watch?v=1_WcZna7yhM&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=48',
+       '7.7-Array Based vs Linked Based Sequences': 'https://www.youtube.com/watch?v=1Vr8jIceUPs&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=49',
+       '8.1-General Trees                  ': 'https://www.youtube.com/watch?v=v26ksXOAEqk&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=50',
+       '8.2.a-Binary Trees I               ': 'https://www.youtube.com/watch?v=1U_jc0Xbt20&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=51',
+       '8.2.b-Binary Trees II              ':'https://www.youtube.com/watch?v=w1SYuOPA7s0&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=52',
+       '8.3-Implementing Trees             ':'https://www.youtube.com/watch?v=0rI3IKGT5sw&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=53',
+       '8.4.a-Tree Traversal Algorithms I  ': 'https://www.youtube.com/watch?v=dxYm4zKSHK8&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=54',
+       '8.4.b-Tree Traversal Algorithms II ': 'https://www.youtube.com/watch?v=p2a96ihXe6M&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=55',
+       '9.1-The Priority Queue ADT         ': 'https://www.youtube.com/watch?v=jzHlPAPw7BM&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=56',
+       '9.2-Implementing a Priority Queue  ': 'https://www.youtube.com/watch?v=Vrc5AV8Gi-0&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=57',
+       '9.3-Heaps                          ': 'https://www.youtube.com/watch?v=TGbSFy9NDMs&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=58',
+       '9.4- Sorting with a Priority Queue ': 'https://www.youtube.com/watch?v=zwS1naTVKss&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=59',
+       '10.1-Maps and Dictionaries         ': 'https://www.youtube.com/watch?v=IO6ihqJei1s&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=60',
+       '10.2.a-Hash Tables I               ': 'https://www.youtube.com/watch?v=FtVrV5CW6hg&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=61',
+       '10.2.b-Hash Tables II              ': 'https://www.youtube.com/watch?v=gEDT3zrv-Sg&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=62',
+       '10.2.c-Hash Tables III             ': 'https://www.youtube.com/watch?v=gzubtN-hOiU&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=63',
+       'None-Recursion trace I             ': 'https://www.youtube.com/watch?v=KtyMUDd7sCc&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=64',
+       'None-Recursion trace II            ': 'https://www.youtube.com/watch?v=0y_pWjqq1eU&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=65',
+       '12.1-Why Study Sorting Algorithms  ': 'https://www.youtube.com/watch?v=URcl-Wc2wCE&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=66',
+       '12.2-Merge Sort                    ': 'https://www.youtube.com/watch?v=fUmSxd-RqD8&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=67',
+       '12.3-Quick Sort                    ': 'https://www.youtube.com/watch?v=bMbvggO81ww&list=PL9bO1eAnkCLtE545pmh0elwPGSGvHPfyb&index=68',
+
+       }
+
+
+for name,web in data.items():
+      for none in data:
+           def youtube(a=web):
+              webbrowser.open(a)
+           break
+
+      button = Button(my_frame,text=name,activeforeground="blue",command=youtube,bg="salmon",font="dosis",bd=10,cursor="hand2" ).pack(fill="both",expand=1)
+
+
+window.mainloop()
